@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>NOVAOS 1.9</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:sans-serif}
+body{background:#000;display:flex;justify-content:center;align-items:center;height:100vh;color:#fff;overflow:hidden}
+input[type=radio],input[type=checkbox]{display:none}
+.device{width:100%;max-width:420px;height:100vh;background:#000;display:flex;flex-direction:column;overflow:hidden}
+.status-bar{width:100%;height:32px;background:#111;display:flex;justify-content:space-between;align-items:center;padding:0 18px;font-size:13px;color:#ccc;direction:ltr}
+.wifi-badge{color:#2196F3;font-weight:bold}
+.bt-badge{color:#555;font-weight:bold;margin-left:8px}
+#wifi-toggle:not(:checked)~.device .wifi-badge{color:#555}
+#bt-toggle:checked~.device .bt-badge{color:#2196F3}
+.screen{display:none;flex:1;flex-direction:column;overflow:hidden}
+#nav-lock:checked~.device #lock-screen,#nav-home:checked~.device #home-screen,#nav-yt:checked~.device #yt-screen,#nav-settings:checked~.device #settings-screen,#nav-about:checked~.device #about-screen{display:flex}
+#lock-screen{justify-content:space-between;align-items:center;background:#000;padding:50px 20px 40px}
+.clock-area{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center}
+.time{font-size:62px;font-weight:300}
+.date{font-size:17px;color:#6ea8fe;margin-top:6px}
+.os-tag{font-size:12px;color:#444;margin-top:10px;letter-spacing:2px}
+.unlock-bar{display:block;width:90%;padding:17px;background:#2196F3;border-radius:25px;text-align:center;font-size:17px;font-weight:bold;color:#fff;cursor:pointer}
+#home-screen{background:#1d1e20;padding:20px;justify-content:space-between}
+.top-bar{display:flex;justify-content:space-between;align-items:center}
+.info-icon{width:36px;height:36px;border:2px solid #fff;border-radius:50%;display:flex;justify-content:center;align-items:center;font-weight:bold;cursor:pointer}
+.menu-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px;margin-bottom:20px}
+.square-btn{aspect-ratio:1/1;background:#2c2e33;color:#fff;border-radius:22px;font-size:17px;font-weight:bold;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:12px}
+.btn-icon{font-size:30px}
+.yt-btn{background:#e62117}
+.sub-screen{background:#18191b;padding:20px;overflow-y:auto}
+.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.back-btn{background:#333;color:#fff;padding:8px 16px;border-radius:10px;cursor:pointer;font-size:14px;text-decoration:none}
+.yt-frame{flex:1;width:100%;border:none;border-radius:15px;background:#000}
+.direct-link{display:block;text-align:center;background:#e62117;color:#fff;padding:12px;border-radius:12px;margin-top:10px;font-weight:bold;text-decoration:none;font-size:14px}
+.card{background:#25272a;padding:18px;border-radius:15px;margin-bottom:15px;display:flex;justify-content:space-between;align-items:center}
+.card p{color:#ccc;font-size:15px}
+.os-val{color:#6ea8fe;font-size:17px;font-weight:bold}
+.ver{background:#2196F3;color:#fff;padding:4px 14px;border-radius:15px;font-weight:bold}
+.status-good{color:#4ade80;font-weight:bold;font-size:15px}
+.status-warn{display:none;color:#f87171;font-weight:bold;font-size:14px}
+#wifi-toggle:not(:checked)~.device .status-good{display:none}
+#wifi-toggle:not(:checked)~.device .status-warn{display:block}
+.switch{position:relative;display:inline-block;width:48px;height:26px;cursor:pointer}
+.slider{position:absolute;top:0;left:0;right:0;bottom:0;background:#555;border-radius:34px}
+.slider:before{position:absolute;content:"";height:18px;width:18px;left:4px;bottom:4px;background:#fff;border-radius:50%}
+#wifi-toggle:checked~.device .wifi-slider,#bt-toggle:checked~.device .bt-slider{background:#2196F3}
+#wifi-toggle:checked~.device .wifi-slider:before,#bt-toggle:checked~.device .bt-slider:before{transform:translateX(22px)}
+.custom-input{background:#333;color:#fff;border:1px solid #555;padding:6px;border-radius:8px;font-size:14px}
+</style>
+</head>
+<body>
+<input type="radio" name="nav" id="nav-lock" checked>
+<input type="radio" name="nav" id="nav-home">
+<input type="radio" name="nav" id="nav-yt">
+<input type="radio" name="nav" id="nav-settings">
+<input type="radio" name="nav" id="nav-about">
+<input type="checkbox" id="wifi-toggle" checked>
+<input type="checkbox" id="bt-toggle">
+
+<div class="device">
+<div class="status-bar"><span>13:14</span><div><span class="wifi-badge">Wi-Fi</span><span class="bt-badge">BT</span></div></div>
+
+<div id="lock-screen" class="screen">
+<div class="clock-area"><div class="time">13:14</div><div class="date">Friday 1 May</div><div class="os-tag">NOVAOS 1.9</div></div>
+<label for="nav-home" class="unlock-bar">افتح النظام</label>
+</div>
+
+<div id="home-screen" class="screen">
+<div class="top-bar"><label for="nav-about" class="info-icon">i</label><span style="font-weight:bold;color:#6ea8fe">NOVAOS 1.9</span><label for="nav-lock" class="back-btn">قفل</label></div>
+<div class="menu-grid">
+<label for="nav-yt" class="square-btn yt-btn"><span class="btn-icon">▶</span><span>يوتيوب</span></label>
+<label for="nav-settings" class="square-btn"><span class="btn-icon">⚙️</span><span>الإعدادات</span></label>
+<label for="nav-about" class="square-btn"><span class="btn-icon">ℹ️</span><span>حول النظام</span></label>
+</div>
+</div>
+
+<div id="yt-screen" class="screen sub-screen">
+<div class="header"><h3>YouTube</h3><label for="nav-home" class="back-btn">رجوع ←</label></div>
+<iframe class="yt-frame" src="https://youtube.com" allowfullscreen></iframe>
+<a href="https://youtube.com" class="direct-link">فتح بملء الشاشة ↗</a>
+</div>
+
+<div id="settings-screen" class="screen sub-screen">
+<div class="header"><h3>الإعدادات</h3><label for="nav-home" class="back-btn">رجوع ←</label></div>
+<div class="card"><p>واي فاي (Wi-Fi)</p><label for="wifi-toggle" class="switch"><span class="slider wifi-slider"></span></label></div>
+<div class="card"><p>بلوتوث (Bluetooth)</p><label for="bt-toggle" class="switch"><span class="slider bt-slider"></span></label></div>
+<div class="card"><p>تعديل الوقت</p><input type="time" class="custom-input" value="13:14"></div>
+<div class="card"><p>تعديل التاريخ</p><input type="text" class="custom-input" style="width:120px" value="Friday 1 May"></div>
+</div>
+
+<div id="about-screen" class="screen sub-screen">
+<div class="header"><h3>حول النظام</h3><label for="nav-home" class="back-btn">رجوع ←</label></div>
+<div class="card"><p>اسم النظام:</p><p class="os-val">NOVAOS</p></div>
+<div class="card"><p>الإصدار:</p><span class="ver">1.9</span></div>
+<div class="card"><p>الحالة:</p><p class="status-good">جيد</p><p class="status-warn">مشكلة: الشبكة متوقفة</p></div>
+</div>
+</div>
+</body>
+</html>
